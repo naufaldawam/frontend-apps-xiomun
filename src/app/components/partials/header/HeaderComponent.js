@@ -15,7 +15,7 @@ export default function Header({ mode, cart = [], setShowCart }) {
                     {/* Desktop Nav */}
                     <nav className="hidden md:flex space-x-4 text-sm">
                         <Link href="/menu" className="hover:underline text-black">Home</Link>
-                        <Link href="/menu" className="hover:underline text-black">Offer</Link>
+                        <Link href="/offer" className="hover:underline text-black">Offer</Link>
                         <Link href="/menu" className="hover:underline text-black">Products</Link>
                         <Link href="/menu" className="hover:underline text-black">Pages</Link>
                     </nav>
@@ -56,7 +56,7 @@ export default function Header({ mode, cart = [], setShowCart }) {
                     <div className="md:hidden fixed top-[64px] left-0 right-0 bg-[#fef6ee] px-6 py-4 shadow-md z-20">
                         <nav className="flex flex-col space-y-2 text-sm">
                             <Link href="/toot" className="hover:underline text-black" onClick={() => setIsMenuOpen(false)}>Home</Link>
-                            <Link href="/menu" className="hover:underline text-black" onClick={() => setIsMenuOpen(false)}>Offer</Link>
+                            <Link href="/offer" className="hover:underline text-black" onClick={() => setIsMenuOpen(false)}>Offer</Link>
                             <Link href="/menu" className="hover:underline text-black" onClick={() => setIsMenuOpen(false)}>Products</Link>
                             <Link href="/menu" className="hover:underline text-black" onClick={() => setIsMenuOpen(false)}>Pages</Link>
                             <Link href="/menu" className="mt-2" onClick={() => setIsMenuOpen(false)}>
