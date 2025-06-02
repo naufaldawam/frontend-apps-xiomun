@@ -7,7 +7,7 @@ const WellcomePage = () => {
     const [menus, setMenus] = useState([]);
 
     useEffect(() => {
-        fetch('https://115d30a6-1a4f-44f1-947f-dcdd65653e5f-00-7zythqgin1gd.worf.replit.dev/getMenuPremiumCoffe', {
+        fetch('https://f581c9bb-5ce0-4e12-b4c2-c2c04e2ed04a-00-3bemsrk26jok6.riker.replit.dev/getMenuPremiumCoffe', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

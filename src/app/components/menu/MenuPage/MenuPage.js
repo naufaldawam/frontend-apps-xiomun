@@ -36,7 +36,7 @@ const MenuPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch("https://115d30a6-1a4f-44f1-947f-dcdd65653e5f-00-7zythqgin1gd.worf.replit.dev/getMenu", {
+        const res = await fetch("https://f581c9bb-5ce0-4e12-b4c2-c2c04e2ed04a-00-3bemsrk26jok6.riker.replit.dev/getMenu", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -164,7 +164,7 @@ const MenuPage = () => {
           <button
             onClick={() => {
               setShowCart(false);
-              router.push("/payment");
+              router.push("/confirmation-payment");
             }}
             className="mt-2 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
           >
