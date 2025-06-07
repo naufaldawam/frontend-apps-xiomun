@@ -28,13 +28,13 @@ const WellcomePage = () => {
         <div>
             <main className="bg-[#fef6ee] min-h-screen text-brown-900 scroll-smooth">
 
-               <Header mode="welcome" />
+                <Header mode="welcome" />
 
                 <section className="flex flex-col md:flex-row items-center justify-between px-6 py-12 bg-gradient-to-b from-[#fce4c4] to-[#fff]  shadow-md">
                     <div className="md:w-1/2 space-y-4">
                         <h2 className="text-4xl font-bold text-[#723c16]">Natural Hand Make Xiomun Coffee</h2>
                         <p className="text-sm text-gray-700">Test the best coffee with your friends and family, boost your energy to fulfill day long with strong balance.</p>
-                        <ButtonOrderNow style="bg-[#723c16] hover:bg-[#5c2f11] text-white px-4 py-2 rounded-sm shadow"/>
+                        <ButtonOrderNow style="bg-[#723c16] hover:bg-[#5c2f11] text-white px-4 py-2 rounded-sm shadow" />
                     </div>
                     <div className="md:w-1/2 mt-6 md:mt-0">
                         <img
@@ -68,13 +68,20 @@ const WellcomePage = () => {
                                 key={i}
                                 className="bg-white p-4 rounded-xl shadow hover:scale-105 transition-transform duration-200"
                             >
-                                <div className="w-full h-40 bg-gray-200 rounded-lg mb-2" />
+                                <div className="w-full h-40 bg-gray-200 rounded-lg mb-2 overflow-hidden">
+                                    <img
+                                        src={item.imageMenu}
+                                        alt={item.name}
+                                        className="w-full h-full object-cover rounded-lg"
+                                    />
+                                </div>
                                 <h5 className="font-semibold text-center text-black">{item.name}</h5>
                                 <p className="text-sm text-center text-gray-600">Rp {item.price.toLocaleString()}</p>
                             </div>
                         ))}
                     </div>
                 </section>
+
 
                 {/* footer */}
                 <section className="py-16 px-6 bg-white rounded-xl my-10 mx-4 shadow-md">
