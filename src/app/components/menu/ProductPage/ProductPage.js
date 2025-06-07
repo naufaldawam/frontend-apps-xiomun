@@ -1,58 +1,68 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const ProductPage = () => {
   const [preference, setPreference] = useState("");
   const [loading, setLoading] = useState(false);
   const [recommendation, setRecommendation] = useState("");
   const [error, setError] = useState("");
+  const [displayedText, setDisplayedText] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
     setRecommendation("");
+    setDisplayedText("");
 
     try {
-      const response = await fetch(
-        "https://f581c9bb-5ce0-4e12-b4c2-c2c04e2ed04a-00-3bemsrk26jok6.riker.replit.dev/recommendation",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ preference }),
-        }
-      );
+      const response = await fetch("https://f581c9bb-5ce0-4e12-b4c2-c2c04e2ed04a-00-3bemsrk26jok6.riker.replit.dev/recommendation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ preference }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
 
       const data = await response.json();
 
-      if (!response.ok || !data.status) {
+      if (!data.status) {
         throw new Error(data.responseMessage || "Gagal mengambil rekomendasi.");
       }
 
-      setRecommendation(data.result?.recommendation || "");
+      const text = data.result?.recommendation || "Tidak ada rekomendasi tersedia.";
+      setRecommendation(text);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Terjadi kesalahan saat mengambil data.");
     } finally {
       setLoading(false);
     }
   };
 
-  // Simulasi efek mengetik
-  const [displayedText, setDisplayedText] = useState("");
-  React.useEffect(() => {
-    if (recommendation) {
-      let i = 0;
+  useEffect(() => {
+    if (!recommendation) {
       setDisplayedText("");
-      const interval = setInterval(() => {
-        setDisplayedText((prev) => prev + recommendation[i]);
-        i++;
-        if (i >= recommendation.length) clearInterval(interval);
-      }, 20);
-      return () => clearInterval(interval);
+      return;
     }
+
+    let i = 0;
+    let displayed = "";
+    setDisplayedText("");
+
+    const interval = setInterval(() => {
+      if (i < recommendation.length) {
+        displayed += recommendation.charAt(i);
+        setDisplayedText(displayed);
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 20);
+
+    return () => clearInterval(interval);
   }, [recommendation]);
 
   return (
@@ -71,12 +81,18 @@ const ProductPage = () => {
               rows={3}
               className="w-full p-4 border border-gray-300 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-[#a35e20] transition"
               required
+              disabled={loading}
             />
             <button
               type="submit"
-              className="absolute right-3 bottom-3 bg-[#a35e20] text-white px-4 py-1 rounded hover:bg-[#723c16] transition"
+              disabled={loading}
+              className={`absolute right-3 bottom-3 px-4 py-1 rounded text-white transition
+                ${loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-[#a35e20] hover:bg-[#723c16]"
+                }`}
             >
-              Kirim
+              {loading ? "Memuat..." : "Kirim"}
             </button>
           </div>
         </form>
